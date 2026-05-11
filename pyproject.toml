@@ -1,0 +1,28 @@
+[project]
+name = "idalib-mcp-headless"
+version = "0.1.0"
+description = "Headless multi-instance IDA Pro MCP supervisor using idalib"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ida-pro-mcp @ https://github.com/mrexodia/ida-pro-mcp/archive/refs/heads/main.zip",
+    "tomli-w>=1.0.0",
+]
+
+[project.urls]
+Repository = "https://github.com/nyaoouo/idalib-mcp"
+Issues = "https://github.com/nyaoouo/idalib-mcp/issues"
+
+[project.scripts]
+idalib-mcp-headless = "idalib_mcp.server:main"
+idalib-mcp-worker = "idalib_mcp.worker:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pyright]
+include = ["src", "tests"]
