@@ -35,6 +35,12 @@ def main() -> None:
             "dependencies, then retry."
         ) from exc
 
+    # Register idalib-mcp extension tools. Importing this module triggers
+    # the upstream @tool decorator, which inserts the tools into
+    # ida_pro_mcp.ida_mcp.MCP_SERVER before idalib_server.main() starts
+    # serving them.
+    from . import api_sigworker  # noqa: F401
+
     os.environ.setdefault("IDA_MCP_WORKER", "1")
     upstream_server.main()
 
