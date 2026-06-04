@@ -41,6 +41,16 @@ def main() -> None:
     # serving them.
     from . import api_sigworker  # noqa: F401
 
+    # Remove upstream sigmaker tools superseded by the advanced variants.
+    from ida_pro_mcp.ida_mcp.rpc import MCP_SERVER
+    for _name in (
+        "make_signature",
+        "make_signature_for_function",
+        "make_signature_for_range",
+        "find_xref_signatures",
+    ):
+        MCP_SERVER.tools.methods.pop(_name, None)
+
     os.environ.setdefault("IDA_MCP_WORKER", "1")
     upstream_server.main()
 
